@@ -1,28 +1,22 @@
-.square {
-  float:left;
-  position: relative;
-  width: 5%;
-  padding-bottom : 5%; /* = width for a 1:1 aspect ratio */
-  overflow:hidden;
-  border-style: solid;
-  border-width: 1px;
-  border-color: black;
+.container {
+  background: black;
+  display: inline-block;
+  border: 5px solid black;
 }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  grid-template-rows: repeat(3, 80px);
+  grid-gap: 5px;
+}
+.cell {
+   /* center the cell content */
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-family: Arial;
+  font-size: 3rem;
+  font-weight: bold;
+  background: white;
 
-.content {
-  position:absolute;
-  height:80%; /* = 100% - 2*10% padding */
-  width:90%; /* = 100% - 2*5% padding */
-  padding: 10% 5%;
-}
-.table{
-  display:table;
-  height:100%;
-  width:100%;
-}
-.table-cell{
-  display:table-cell;
-  vertical-align:middle;
-  height:100%;
-  width:100%;
 }
