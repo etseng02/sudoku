@@ -1,6 +1,5 @@
-.main-page{
+.square-grid{
   display: grid;
-  // width: 50%;
   grid-template-columns: repeat(3, 260px);
   grid-template-rows: repeat(3, 260px);
   align-self: center;

@@ -1,14 +1,11 @@
 import React, { Fragment } from 'react';
 import '../styles/index.scss'
-import Square from '../components/square'
+import Square from '../components/Square'
+
 
 const Index = () => {
   return (
-    <div className = "main-page">
-
-
-      <Fragment>
-
+    <div className = "square-grid">
             <Square/>
             <Square/>
             <Square/>
@@ -18,9 +15,6 @@ const Index = () => {
             <Square/>
             <Square/>
             <Square/>
-
-      </Fragment>
-
     </div>
   );
 }
