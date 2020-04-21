@@ -2,6 +2,8 @@ import React, { Fragment, useState } from 'react';
 import '../styles/index.scss'
 
 import Square from '../components/Square.js'
+import Button from '../components/Button'
+import solveSudoku from '../helper/helperFunctions'
 
 
 const Index = () => {
@@ -31,8 +33,12 @@ const Index = () => {
             <Square data={state.block8}/>
             <Square data={state.block9}/>
     </div>
+
+    <Button
+      text={"Start"}
+      solve={solveSudoku}/>
+
     </Fragment>
   );
 }
-
 export default Index;
