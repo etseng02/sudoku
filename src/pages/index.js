@@ -10,9 +10,16 @@ const Index = () => {
       <Fragment>
 
             <Square/>
+            <Square/>
+            <Square/>
+            <Square/>
+            <Square/>
+            <Square/>
+            <Square/>
+            <Square/>
+            <Square/>
 
       </Fragment>
-
 
     </div>
   );

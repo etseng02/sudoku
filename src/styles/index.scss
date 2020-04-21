@@ -1,4 +1,8 @@
-// .main-page{
-//   background-color: #282c34;
-// }
+.main-page{
+  display: grid;
+  // width: 50%;
+  grid-template-columns: repeat(3, 260px);
+  grid-template-rows: repeat(3, 260px);
+  align-self: center;
+}
   
