@@ -1,11 +1,8 @@
-
-
-
 const checkRow = (rowNumber, blockNumber, dataModel) => {
-//within its own block it should check all the values of either the top, middle or bottom row
 
+  let eliminatedNumbers = []
   let blocks = []
-  let possibleNumbers = []
+
 
   if (blockNumber === 1 || blockNumber === 2 || blockNumber === 3) {
     blocks = [1,2,3]
@@ -16,18 +13,18 @@ const checkRow = (rowNumber, blockNumber, dataModel) => {
   }
 
   blocks.forEach((block)=>{
-      possibleNumbers = possibleNumbers.concat(dataModel["block"+block][rowNumber])
+    eliminatedNumbers = eliminatedNumbers.concat(dataModel["block"+block][rowNumber])
   })
 
-  possibleNumbers = possibleNumbers.filter(function(val) { return val !== null; }).join(", ")
+  eliminatedNumbers = eliminatedNumbers.filter(function(val) { return val !== null; })
 
-  console.log("POSSIBLE ROW NUMBERS " + possibleNumbers)
-  return possibleNumbers
+  // console.log("ELIMINATED ROW NUMBERS " + eliminatedNumbers)
+  return eliminatedNumbers
 
 }
 
 const checkColumn = (columnNumber, blockNumber, dataModel) => {
-  let possibleNumbers = []
+  let eliminatedNumbers = []
   let blocks = []
 
   if (blockNumber === 1 || blockNumber === 4 || blockNumber === 7) {
@@ -40,60 +37,26 @@ const checkColumn = (columnNumber, blockNumber, dataModel) => {
 
     blocks.forEach((block)=>{
       for (let rowIteration = 0; rowIteration <= 2; rowIteration++){
-        possibleNumbers.push(dataModel["block"+block][rowIteration][columnNumber])
+        eliminatedNumbers.push(dataModel["block"+block][rowIteration][columnNumber])
       }
     })
 
-    possibleNumbers = possibleNumbers.filter(function(val) { return val !== null; }).join(", ")
-    console.log("POSSIBLE COLUMN NUMBERS " + possibleNumbers)
-    return possibleNumbers
+    eliminatedNumbers = eliminatedNumbers.filter(function(val) { return val !== null; });
+    // console.log("ELIMINATED COLUMN NUMBERS " + possibleNumbers)
+    return eliminatedNumbers
 }
 
 const checkWithinBlock = (blockNumber, dataModel) => {
-  let possibleNumbers = []
+  let eliminatedNumbers = []
+  let block = dataModel["block" + blockNumber]
 
+  block.forEach((row)=>{
+    eliminatedNumbers = eliminatedNumbers.concat(row)
+  })
+
+  eliminatedNumbers = eliminatedNumbers.filter(function(val) { return val !== null; });
+  // console.log("ELINATED BLOCK NUMBERS " + possibleNumbers)
+  return eliminatedNumbers
 }
 
-
-const solveSudoku = (state) => {
-  console.log("yes")
-
-  let dataModel = state
-
-  //Iterate over every block
-  for (let blockNumber = 1; blockNumber <= 9; blockNumber++) {
-
-    let currentBlock = dataModel["block"+ blockNumber]
-
-    console.log(currentBlock)
-
-    //iterate over each square in every block
-
-    for (let row = 0; row <= 2; row++) {
-      for (let number = 0; number <= 2; number++) {
-
-        if (currentBlock[row][number] === null) {
-        //  console.log(blockNumber + " " + row + " " + number + " is null")
-          checkRow(row, blockNumber, dataModel)
-          checkColumn(number, blockNumber, dataModel)
-          checkWithinBlock(blockNumber, dataModel)
-        }
-
-    
-      }
-    }
-
-  }
-
-
-};
-
-
-
-
-
-
-
-
-
-export default solveSudoku;
+export {checkRow, checkColumn, checkWithinBlock};
