@@ -9,15 +9,15 @@ import solveSudoku from '../helper/helperFunctions'
 const Index = () => {
 
   const [state, setState] = useState({
-    block1: [[1, 0, 4],[0, 0,0],[0, 0,1]],
-    block2: [[null, null,null],[null, null,null],[null, null,null]],
-    block3: [[null, null,null],[null, null,null],[null, null,null]],
-    block4: [[null, null,null],[null, null,null],[null, null,null]],
-    block5: [[null, null,null],[null, null,null],[null, null,null]],
-    block6: [[null, null,null],[null, null,null],[null, null,null]],
-    block7: [[null, null,null],[null, null,1],[null, null,null]],
-    block8: [[null, null,null],[null, null,null],[null, null,null]],
-    block9: [[null, null,null],[null, null,null],[null, null,null]],
+    block1: [[8, null, 1],[2, 5, null],[null, 4, null]],
+    block2: [[null, null, null],[null, 7, null],[null, null, 8]],
+    block3: [[null, null, null],[null, 9, null],[null, 2, 6]],
+    block4: [[null, null, 7],[null, null, 5],[null, null, 3]],
+    block5: [[8, null, 5],[null, 4, 3],[7, 9, null]],
+    block6: [[null, 1, 3],[null, null, 7],[null, null, 4]],
+    block7: [[null, 9, null],[1, null, null],[null, 6, 4]],
+    block8: [[4, null, 7],[5, 8, 6],[null, 1, 2]],
+    block9: [[null, 6, 2],[null, 7, 9],[null, null, null]],
   });
 
   return (
@@ -36,7 +36,9 @@ const Index = () => {
 
     <Button
       text={"Start"}
-      solve={solveSudoku}/>
+      solve={solveSudoku}
+      numbers={state}
+      />
 
     </Fragment>
   );

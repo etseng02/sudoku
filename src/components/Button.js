@@ -5,7 +5,7 @@ import '../styles/button.scss'
 const Button = (props) => {
 
   return (
-    <div className="start" onClick={()=> props.solve()}>
+    <div className="start" onClick={()=> props.solve(props.numbers)}>
       <h1>{props.text}</h1>
     </div>
   )
