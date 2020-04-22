@@ -4,29 +4,53 @@
 const checkRow = (rowNumber, blockNumber, dataModel) => {
 //within its own block it should check all the values of either the top, middle or bottom row
 
-
+  let blocks = []
   let possibleNumbers = []
 
   if (blockNumber === 1 || blockNumber === 2 || blockNumber === 3) {
-    possibleNumbers = dataModel.block1[rowNumber].concat(dataModel.block2[rowNumber]).concat(dataModel.block3[rowNumber])
-    possibleNumbers = possibleNumbers.filter(function(val) { return val !== null; }).join(", ")
+    blocks = [1,2,3]
   } else if (blockNumber === 4 || blockNumber === 5 || blockNumber === 6) {
-    possibleNumbers = dataModel.block4[rowNumber].concat(dataModel.block5[rowNumber]).concat(dataModel.block6[rowNumber])
-    possibleNumbers = possibleNumbers.filter(function(val) { return val !== null; }).join(", ")
+    blocks = [4,5,6]
   } else if (blockNumber === 7 || blockNumber === 8 || blockNumber === 9) {
-    possibleNumbers = dataModel.block7[rowNumber].concat(dataModel.block8[rowNumber]).concat(dataModel.block9[rowNumber])
-    possibleNumbers = possibleNumbers.filter(function(val) { return val !== null; }).join(", ")
+    blocks = [7,8,9]
   }
 
+  blocks.forEach((block)=>{
+      possibleNumbers = possibleNumbers.concat(dataModel["block"+block][rowNumber])
+  })
+
+  possibleNumbers = possibleNumbers.filter(function(val) { return val !== null; }).join(", ")
+
   console.log("POSSIBLE ROW NUMBERS " + possibleNumbers)
+  return possibleNumbers
 
 }
 
-const checkColumn = () => {
+const checkColumn = (columnNumber, blockNumber, dataModel) => {
   let possibleNumbers = []
+  let blocks = []
 
-  
+  if (blockNumber === 1 || blockNumber === 4 || blockNumber === 7) {
+    blocks = [1,4,7]
+  } else if (blockNumber === 2 || blockNumber === 5 || blockNumber === 8) {
+    blocks = [2,5,8]
+  } else if (blockNumber === 3 || blockNumber === 6 || blockNumber === 9) {
+    blocks = [3,6,9]
+  }
 
+    blocks.forEach((block)=>{
+      for (let rowIteration = 0; rowIteration <= 2; rowIteration++){
+        possibleNumbers.push(dataModel["block"+block][rowIteration][columnNumber])
+      }
+    })
+
+    possibleNumbers = possibleNumbers.filter(function(val) { return val !== null; }).join(", ")
+    console.log("POSSIBLE COLUMN NUMBERS " + possibleNumbers)
+    return possibleNumbers
+}
+
+const checkWithinBlock = (blockNumber, dataModel) => {
+  let possibleNumbers = []
 
 }
 
@@ -52,6 +76,7 @@ const solveSudoku = (state) => {
         //  console.log(blockNumber + " " + row + " " + number + " is null")
           checkRow(row, blockNumber, dataModel)
           checkColumn(number, blockNumber, dataModel)
+          checkWithinBlock(blockNumber, dataModel)
         }
 
     
