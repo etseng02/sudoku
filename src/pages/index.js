@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 import '../styles/index.scss'
 
 import Square from '../components/Square.js'
@@ -21,74 +21,46 @@ const Index = () => {
   });
 
   const solveSudoku = (state) => {
-    console.log("solve sudoku activated")
   
     const numbersList = [1,2,3,4,5,6,7,8,9]
   
-    let dataModel = state
-  
-    //Iterate over every block
+    let dataModel = Object.assign({},state);
+
+    //Iterate over every block (9 Squares)
     for (let blockNumber = 1; blockNumber <= 9; blockNumber++) {
   
-      let currentBlock = dataModel["block"+ blockNumber]
-  
+      //Each block has 3 rows, Iterate over each row
       for (let row = 0; row <= 2; row++) {
+
+        //Each row has 3 numbers, iterate over each number
         for (let number = 0; number <= 2; number++) {
-  
-          if (currentBlock[row][number] === null) {
-  
-            let eliminatedNumbers = []
-            let possibleNumbers = []
+
+          if (dataModel["block"+ blockNumber][row][number] === null) {
             
-            eliminatedNumbers = eliminatedNumbers
+            let eliminatedNumbers = []
               .concat(checkRow(row, blockNumber, dataModel))
               .concat(checkColumn(number, blockNumber, dataModel))
               .concat(checkWithinBlock(blockNumber, dataModel));
   
-              // console.log("FINAL "+eliminatedNumbers)
+            let possibleNumbers = numbersList.filter((staticNumber) => !eliminatedNumbers.includes(staticNumber));
   
-              let unique = [...new Set(eliminatedNumbers)];
-  
-              // console.log("unique eliminated Numbers"+unique)
-  
-              possibleNumbers = numbersList.filter((staticNumber) => !unique.includes(staticNumber));
-  
-              // console.log("unique possible Numbers"+ possibleNumbers)
-  
-              if (possibleNumbers.length === 1) {
+            if (possibleNumbers.length === 1) {
 
+              let new_block_state = Object.assign({},[dataModel["block"+ blockNumber]]);
 
-                // console.log("BLOCK: ",blockNumber)
-                // console.log("ROW: ",row)
-                // console.log("NUMBER: ",number)
-                // console.log("CHANGE OF NUMBER: ", possibleNumbers[0])
+              new_block_state[0][row][number] = possibleNumbers[0];
 
-                let new_block_state = [state["block"+ blockNumber]].slice()
+              setState(prevState => ({
+                ...prevState,
+                ["block"+ blockNumber]: [...state["block"+blockNumber], new_block_state ]
 
-                new_block_state[0][row][number] = possibleNumbers[0]                
-                
-                console.log(new_block_state)
-                
-                setState(prevState => ({ 
-                
-                  ...prevState,
-
-                  ["block"+ blockNumber]: [...state["block"+blockNumber], ]
-
-                }))
-
-              }
-  
+              }));
+            }
           }
         }
       }
     }
   };
-
-  useEffect(()=>{
-    
-
-  },[state])
 
   return (
     <Fragment>
