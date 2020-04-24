@@ -22,44 +22,60 @@ const Index = () => {
 
   const solveSudoku = (state) => {
   
-    const numbersList = [1,2,3,4,5,6,7,8,9]
+    const numbersList = [1,2,3,4,5,6,7,8,9];
   
     let dataModel = Object.assign({},state);
 
-    //Iterate over every block (9 Squares)
-    for (let blockNumber = 1; blockNumber <= 9; blockNumber++) {
-  
-      //Each block has 3 rows, Iterate over each row
-      for (let row = 0; row <= 2; row++) {
+    let stopFunction = false;
 
-        //Each row has 3 numbers, iterate over each number
-        for (let number = 0; number <= 2; number++) {
 
-          if (dataModel["block"+ blockNumber][row][number] === null) {
-            
-            let eliminatedNumbers = []
-              .concat(checkRow(row, blockNumber, dataModel))
-              .concat(checkColumn(number, blockNumber, dataModel))
-              .concat(checkWithinBlock(blockNumber, dataModel));
-  
-            let possibleNumbers = numbersList.filter((staticNumber) => !eliminatedNumbers.includes(staticNumber));
-  
-            if (possibleNumbers.length === 1) {
 
-              let new_block_state = Object.assign({},[dataModel["block"+ blockNumber]]);
+    while (stopFunction === false) {
 
-              new_block_state[0][row][number] = possibleNumbers[0];
+      let numbersChanged = false
 
-              setState(prevState => ({
-                ...prevState,
-                ["block"+ blockNumber]: [...state["block"+blockNumber], new_block_state ]
+      //Iterate over every block (9 Squares)
+      for (let blockNumber = 1; blockNumber <= 9; blockNumber++) {
+    
+        //Each block has 3 rows, Iterate over each row
+        for (let row = 0; row <= 2; row++) {
 
-              }));
+          //Each row has 3 numbers, iterate over each number
+          for (let number = 0; number <= 2; number++) {
+
+            if (dataModel["block"+ blockNumber][row][number] === null) {
+              
+              let eliminatedNumbers = []
+                .concat(checkRow(row, blockNumber, dataModel))
+                .concat(checkColumn(number, blockNumber, dataModel))
+                .concat(checkWithinBlock(blockNumber, dataModel));
+    
+              let possibleNumbers = numbersList.filter((staticNumber) => !eliminatedNumbers.includes(staticNumber));
+    
+              if (possibleNumbers.length === 1) {
+
+                numbersChanged = true;
+
+                let new_block_state = Object.assign({},[dataModel["block"+ blockNumber]]);
+
+                new_block_state[0][row][number] = possibleNumbers[0];
+
+                setState(prevState => ({
+                  ...prevState,
+                  ["block"+ blockNumber]: [...state["block"+blockNumber], new_block_state ]
+
+                }));
+              }
             }
           }
         }
+      }// end of block loop
+
+      if (numbersChanged === false) {
+        stopFunction = true;
       }
-    }
+
+    }//end of while loop 
   };
 
   return (
