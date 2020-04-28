@@ -3,6 +3,7 @@ import '../styles/index.scss'
 
 import SquareBlock from '../components/SquareBlock.js'
 import Button from '../components/Button'
+import Input from '../components/Input'
 import {checkRow, checkColumn, checkWithinBlock} from '../helper/helperFunctions'
 
 
@@ -98,6 +99,8 @@ const Index = () => {
             <SquareBlock blockid={8} data={state.block8} fn={selectSquare} selectedSquare={state.selectedSquare}/>
             <SquareBlock blockid={9} data={state.block9} fn={selectSquare} selectedSquare={state.selectedSquare}/>
     </div>
+
+    <Input/>
 
     <Button
       text={"Start"}

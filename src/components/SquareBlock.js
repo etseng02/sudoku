@@ -23,15 +23,14 @@ const SquareBlock = ({data, fn, blockid, selectedSquare}) => {
     }
     },[data])
 
-    const Square = ({display, id, blockid}) => {
+  const Square = ({display, id, blockid}) => {
 
-      if (blockid === selectedSquare[0] && id === selectedSquare[1]){
-        return <div className="selected-cell" onClick={()=>fn(blockid, id)}>{display}</div>
-     } else {
-       return <div className="cell" onClick={()=>fn(blockid, id)}>{display}</div>
-     }
-    
+    if (blockid === selectedSquare[0] && id === selectedSquare[1]){
+      return <div className="selected-cell" onClick={()=>fn(blockid, id)}>{display}</div>
+    } else {
+      return <div className="cell" onClick={()=>fn(blockid, id)}>{display}</div>
     }
+  }
 
 
   return (
