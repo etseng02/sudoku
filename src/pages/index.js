@@ -1,7 +1,7 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import '../styles/index.scss'
 
-import Square from '../components/Square.js'
+import SquareBlock from '../components/SquareBlock.js'
 import Button from '../components/Button'
 import {checkRow, checkColumn, checkWithinBlock} from '../helper/helperFunctions'
 
@@ -18,6 +18,7 @@ const Index = () => {
     block7: [[null, 9, null],[1, null, null],[null, 6, 4]],
     block8: [[4, null, 7],[5, 8, 6],[null, 1, 2]],
     block9: [[null, 6, 2],[null, 7, 9],[null, null, null]],
+    selectedSquare: [null, null]
   });
 
   const solveSudoku = (state) => {
@@ -27,8 +28,6 @@ const Index = () => {
     let dataModel = Object.assign({},state);
 
     let stopFunction = false;
-
-
 
     while (stopFunction === false) {
 
@@ -63,7 +62,6 @@ const Index = () => {
                 setState(prevState => ({
                   ...prevState,
                   ["block"+ blockNumber]: [...state["block"+blockNumber], new_block_state ]
-
                 }));
               }
             }
@@ -78,28 +76,36 @@ const Index = () => {
     }//end of while loop 
   };
 
+  const selectSquare = (blockid, number) => {
+    if (blockid === state.selectedSquare[0] && number === state.selectedSquare[1]){
+      setState({...state, selectedSquare: [null, null]});
+    } else {
+      setState({...state, selectedSquare: [blockid, number]});
+    }
+    console.log(`BLOCK${blockid}, number was selected ${state.selectedSquare}`);
+  } 
+
   return (
-    <Fragment>
+    <>
     <div className = "square-grid">
-            <Square data={state.block1}/>
-            <Square data={state.block2}/>
-            <Square data={state.block3}/>
-            <Square data={state.block4}/>
-            <Square data={state.block5}/>
-            <Square data={state.block6}/>
-            <Square data={state.block7}/>
-            <Square data={state.block8}/>
-            <Square data={state.block9}/>
+            <SquareBlock blockid={1} data={state.block1} fn={selectSquare} selectedSquare={state.selectedSquare}/>
+            <SquareBlock blockid={2} data={state.block2} fn={selectSquare} selectedSquare={state.selectedSquare}/>
+            <SquareBlock blockid={3} data={state.block3} fn={selectSquare} selectedSquare={state.selectedSquare}/>
+            <SquareBlock blockid={4} data={state.block4} fn={selectSquare} selectedSquare={state.selectedSquare}/>
+            <SquareBlock blockid={5} data={state.block5} fn={selectSquare} selectedSquare={state.selectedSquare}/>
+            <SquareBlock blockid={6} data={state.block6} fn={selectSquare} selectedSquare={state.selectedSquare}/>
+            <SquareBlock blockid={7} data={state.block7} fn={selectSquare} selectedSquare={state.selectedSquare}/>
+            <SquareBlock blockid={8} data={state.block8} fn={selectSquare} selectedSquare={state.selectedSquare}/>
+            <SquareBlock blockid={9} data={state.block9} fn={selectSquare} selectedSquare={state.selectedSquare}/>
     </div>
 
     <Button
       text={"Start"}
-      solve={solveSudoku}
+      fn={solveSudoku}
       numbers={state}
-      update={useState}
       />
 
-    </Fragment>
+    </>
   );
 }
 export default Index;
