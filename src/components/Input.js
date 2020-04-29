@@ -1,14 +1,19 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Button from './Button.js'
 import '../styles/input.scss'
 
-const Input = (props) => {
+const Input = ({selectNumberValue}) => {
 
   const [selectedNumber, setNumber] = useState()
 
   const selectNumber = (numberSelector) => {
     setNumber(numberSelector)
   }
+
+  useEffect(()=>{
+    selectNumberValue(selectedNumber)
+
+  },[selectedNumber])
 
   return (
     <>
@@ -22,6 +27,7 @@ const Input = (props) => {
         <Button className = "input-button" text={"7"} fn={selectNumber} selectedNumber = {selectedNumber}/>
         <Button className = "input-button" text={"8"} fn={selectNumber} selectedNumber = {selectedNumber}/>
         <Button className = "input-button" text={"9"} fn={selectNumber} selectedNumber = {selectedNumber}/>
+        <Button className = "input-button" text={" "} fn={selectNumber} selectedNumber = {selectedNumber}/>
       </div>
     </>
   );

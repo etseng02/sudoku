@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/index.scss'
 
 import SquareBlock from '../components/SquareBlock.js'
@@ -19,7 +19,8 @@ const Index = () => {
     block7: [[null, 9, null],[1, null, null],[null, 6, 4]],
     block8: [[4, null, 7],[5, 8, 6],[null, 1, 2]],
     block9: [[null, 6, 2],[null, 7, 9],[null, null, null]],
-    selectedSquare: [null, null]
+    selectedSquare: [null, null],
+    selectedNumber: null
   });
 
   const solveSudoku = (state) => {
@@ -80,33 +81,57 @@ const Index = () => {
   const selectSquare = (blockid, number) => {
     if (blockid === state.selectedSquare[0] && number === state.selectedSquare[1]){
       setState({...state, selectedSquare: [null, null]});
+      console.log("Unselected")
     } else {
       setState({...state, selectedSquare: [blockid, number]});
+      console.log(`BLOCK${blockid}, number was selected ${state.selectedSquare[1]}`);
     }
-    console.log(`BLOCK${blockid}, number was selected ${state.selectedSquare}`);
-  } 
+  }
+
+  const selectNumberValue = (selectedNumber) => {
+    setState({...state, selectedNumber: selectedNumber});
+  }
+
+  useEffect(()=>{
+    console.log(state.selectedSquare, " the square")
+    console.log(state.selectedNumber, " the number")
+
+    if (state.selectedSquare[0] !== null) {
+
+      let row = Math.floor((state.selectedSquare[1]-1)/3)
+      let rowPosition = (state.selectedSquare[1]-(row*3))-1
+
+      console.log(row)
+      console.log(rowPosition)
+
+      let newBlock = state["block"+state.selectedSquare[0]]
+  
+      newBlock[row][rowPosition] = state.selectedNumber
+
+      setState(prevState => ({...prevState, ["block"+state.selectedSquare[0]]: newBlock}));
+    }
+
+  },[state.selectedNumber])
+
+  useEffect(()=>{},[])
 
   return (
     <>
-    <div className = "square-grid">
-            <SquareBlock blockid={1} data={state.block1} fn={selectSquare} selectedSquare={state.selectedSquare}/>
-            <SquareBlock blockid={2} data={state.block2} fn={selectSquare} selectedSquare={state.selectedSquare}/>
-            <SquareBlock blockid={3} data={state.block3} fn={selectSquare} selectedSquare={state.selectedSquare}/>
-            <SquareBlock blockid={4} data={state.block4} fn={selectSquare} selectedSquare={state.selectedSquare}/>
-            <SquareBlock blockid={5} data={state.block5} fn={selectSquare} selectedSquare={state.selectedSquare}/>
-            <SquareBlock blockid={6} data={state.block6} fn={selectSquare} selectedSquare={state.selectedSquare}/>
-            <SquareBlock blockid={7} data={state.block7} fn={selectSquare} selectedSquare={state.selectedSquare}/>
-            <SquareBlock blockid={8} data={state.block8} fn={selectSquare} selectedSquare={state.selectedSquare}/>
-            <SquareBlock blockid={9} data={state.block9} fn={selectSquare} selectedSquare={state.selectedSquare}/>
-    </div>
+      <div className = "square-grid">
+        <SquareBlock blockid={1} data={state.block1} fn={selectSquare} selectedSquare={state.selectedSquare}/>
+        <SquareBlock blockid={2} data={state.block2} fn={selectSquare} selectedSquare={state.selectedSquare}/>
+        <SquareBlock blockid={3} data={state.block3} fn={selectSquare} selectedSquare={state.selectedSquare}/>
+        <SquareBlock blockid={4} data={state.block4} fn={selectSquare} selectedSquare={state.selectedSquare}/>
+        <SquareBlock blockid={5} data={state.block5} fn={selectSquare} selectedSquare={state.selectedSquare}/>
+        <SquareBlock blockid={6} data={state.block6} fn={selectSquare} selectedSquare={state.selectedSquare}/>
+        <SquareBlock blockid={7} data={state.block7} fn={selectSquare} selectedSquare={state.selectedSquare}/>
+        <SquareBlock blockid={8} data={state.block8} fn={selectSquare} selectedSquare={state.selectedSquare}/>
+        <SquareBlock blockid={9} data={state.block9} fn={selectSquare} selectedSquare={state.selectedSquare}/>
+      </div>
 
-    <Input/>
+      <Input selectNumberValue={selectNumberValue}/>
 
-    <Button
-      text={"Start"}
-      fn={solveSudoku}
-      numbers={state}
-      />
+      <Button text={"Start"} fn={solveSudoku} numbers={state}/>
 
     </>
   );
