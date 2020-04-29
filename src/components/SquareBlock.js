@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import '../styles/squareblock.scss'
 
 const SquareBlock = ({data, fn, blockid, selectedSquare}) => {
@@ -11,7 +11,6 @@ const SquareBlock = ({data, fn, blockid, selectedSquare}) => {
       return <div className="cell" onClick={()=>fn(blockid, id)}>{display}</div>
     }
   }
-
 
   return (
     <div className="container">

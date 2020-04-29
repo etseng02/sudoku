@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../styles/index.scss'
 
 import SquareBlock from '../components/SquareBlock.js'
@@ -19,11 +19,12 @@ const Index = () => {
     block7: [[null, 9, null],[1, null, null],[null, 6, 4]],
     block8: [[4, null, 7],[5, 8, 6],[null, 1, 2]],
     block9: [[null, 6, 2],[null, 7, 9],[null, null, null]],
-    selectedSquare: [null, null],
-    selectedNumber: null
+    selectedSquare: [null, null]
   });
 
   const solveSudoku = (state) => {
+
+    setState(prevState => ({...prevState, selectedSquare: [null,null]}));
   
     const numbersList = [1,2,3,4,5,6,7,8,9];
   
@@ -88,25 +89,15 @@ const Index = () => {
     }
   }
 
-  const selectNumberValue = (selectedNumber) => {
-    setState({...state, selectedNumber: selectedNumber});
-  }
-
-  useEffect(()=>{
-
-    console.log("this happened")
-    if (state.selectedSquare[0] !== null && state.selectedNumber !== undefined) {
-
+  const insertNumber = (selectedNumber) => {
+    if (state.selectedSquare[0] !== null && state.selectedSquare[1] !== null) {
       let row = Math.floor((state.selectedSquare[1]-1)/3)
       let rowPosition = (state.selectedSquare[1]-(row*3))-1
       let newBlock = state["block"+state.selectedSquare[0]]
-      newBlock[row][rowPosition] = state.selectedNumber
-
-      setState(prevState => ({...prevState, ["block"+state.selectedSquare[0]]: newBlock, selectedNumber: undefined}));
-      
+      newBlock[row][rowPosition] = selectedNumber
+      setState(prevState => ({...prevState, ["block"+state.selectedSquare[0]]: newBlock}));
     }
-
-  },[state.selectedNumber])
+  }
 
   return (
     <>
@@ -122,7 +113,7 @@ const Index = () => {
         <SquareBlock blockid={9} data={state.block9} fn={selectSquare} selectedSquare={state.selectedSquare}/>
       </div>
 
-      <Input selectNumberValue={selectNumberValue} selectedNumber ={state.selectedNumber}/>
+      <Input insertNumber={insertNumber} />
 
       <Button text={"Start"} fn={solveSudoku} numbers={state}/>
 

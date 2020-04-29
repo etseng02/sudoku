@@ -4,31 +4,12 @@ import '../styles/button.scss'
 
 const Button = (props) => {
 
-
   if (props.text === "Start") {
     return (
-      <div className={"start"} onClick={()=> props.fn(props.numbers)}>
-        <h1>{props.text}</h1>
-      </div>
-    );
-
-  } else if (props.className === "input-button" && props.selectedNumber === parseInt(props.text,10)) {
-    return (
       <div 
-        className ={"selected-number"}
-        onClick={()=>props.fn(parseInt(props.text, 10))}>
-        <h1>{props.text}</h1>
-      </div>
+        className={"start"}
+        onClick={()=> props.fn(props.numbers)}><h1>{props.text}</h1></div>
     );
-  } else if (props.className === "input-button" &&  props.text === " " && props.selectedNumber === null) {
-    return (
-      <div 
-        className ={"selected-number"}
-        onClick={()=>props.fn(null)}>
-        <h1>{props.text}</h1>
-      </div>
-    );
-
   } else if (props.className === "input-button" &&  props.text === " ") {
     return (
       <div 
