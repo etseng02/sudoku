@@ -95,14 +95,15 @@ const Index = () => {
   useEffect(()=>{
 
     console.log("this happened")
-    if (state.selectedSquare[0] !== null) {
+    if (state.selectedSquare[0] !== null && state.selectedNumber !== undefined) {
 
       let row = Math.floor((state.selectedSquare[1]-1)/3)
       let rowPosition = (state.selectedSquare[1]-(row*3))-1
       let newBlock = state["block"+state.selectedSquare[0]]
       newBlock[row][rowPosition] = state.selectedNumber
 
-      setState(prevState => ({...prevState, ["block"+state.selectedSquare[0]]: newBlock}));
+      setState(prevState => ({...prevState, ["block"+state.selectedSquare[0]]: newBlock, selectedNumber: undefined}));
+      
     }
 
   },[state.selectedNumber])
