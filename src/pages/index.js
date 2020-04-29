@@ -93,27 +93,19 @@ const Index = () => {
   }
 
   useEffect(()=>{
-    console.log(state.selectedSquare, " the square")
-    console.log(state.selectedNumber, " the number")
 
+    console.log("this happened")
     if (state.selectedSquare[0] !== null) {
 
       let row = Math.floor((state.selectedSquare[1]-1)/3)
       let rowPosition = (state.selectedSquare[1]-(row*3))-1
-
-      console.log(row)
-      console.log(rowPosition)
-
       let newBlock = state["block"+state.selectedSquare[0]]
-  
       newBlock[row][rowPosition] = state.selectedNumber
 
       setState(prevState => ({...prevState, ["block"+state.selectedSquare[0]]: newBlock}));
     }
 
   },[state.selectedNumber])
-
-  useEffect(()=>{},[])
 
   return (
     <>
@@ -129,7 +121,7 @@ const Index = () => {
         <SquareBlock blockid={9} data={state.block9} fn={selectSquare} selectedSquare={state.selectedSquare}/>
       </div>
 
-      <Input selectNumberValue={selectNumberValue}/>
+      <Input selectNumberValue={selectNumberValue} selectedNumber ={state.selectedNumber}/>
 
       <Button text={"Start"} fn={solveSudoku} numbers={state}/>
 

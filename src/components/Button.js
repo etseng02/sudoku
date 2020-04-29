@@ -11,11 +11,29 @@ const Button = (props) => {
         <h1>{props.text}</h1>
       </div>
     );
+
   } else if (props.className === "input-button" && props.selectedNumber === parseInt(props.text,10)) {
     return (
       <div 
         className ={"selected-number"}
         onClick={()=>props.fn(parseInt(props.text, 10))}>
+        <h1>{props.text}</h1>
+      </div>
+    );
+  } else if (props.className === "input-button" &&  props.text === " " && props.selectedNumber === null) {
+    return (
+      <div 
+        className ={"selected-number"}
+        onClick={()=>props.fn(null)}>
+        <h1>{props.text}</h1>
+      </div>
+    );
+
+  } else if (props.className === "input-button" &&  props.text === " ") {
+    return (
+      <div 
+        className ={props.className}
+        onClick={()=>props.fn(null)}>
         <h1>{props.text}</h1>
       </div>
     );
