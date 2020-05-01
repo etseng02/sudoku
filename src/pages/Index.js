@@ -5,20 +5,21 @@ import SquareBlock from '../components/SquareBlock.js'
 import Button from '../components/Button'
 import Input from '../components/Input'
 import {checkRow, checkColumn, checkWithinBlock} from '../helper/helperFunctions'
+import {clearData, dataSet1, dataSet2} from '../helper/dataSets'
 
 
 const Index = () => {
 
   const [state, setState] = useState({
-    block1: [[8, null, 1],[2, 5, null],[null, 4, null]],
-    block2: [[null, null, null],[null, 7, null],[null, null, 8]],
-    block3: [[null, null, null],[null, 9, null],[null, 2, 6]],
-    block4: [[null, null, 7],[null, null, 5],[null, null, 3]],
-    block5: [[8, null, 5],[null, 4, 3],[7, 9, null]],
-    block6: [[null, 1, 3],[null, null, 7],[null, null, 4]],
-    block7: [[null, 9, null],[1, null, null],[null, 6, 4]],
-    block8: [[4, null, 7],[5, 8, 6],[null, 1, 2]],
-    block9: [[null, 6, 2],[null, 7, 9],[null, null, null]],
+    block1: [[null, null, null],[null, null, null],[null, null, null]],
+    block2: [[null, null, null],[null, null, null],[null, null, null]],
+    block3: [[null, null, null],[null, null, null],[null, null, null]],
+    block4: [[null, null, null],[null, null, null],[null, null, null]],
+    block5: [[null, null, null],[null, null, null],[null, null, null]],
+    block6: [[null, null, null],[null, null, null],[null, null, null]],
+    block7: [[null, null, null],[null, null, null],[null, null, null]],
+    block8: [[null, null, null],[null, null, null],[null, null, null]],
+    block9: [[null, null, null],[null, null, null],[null, null, null]],
     selectedSquare: [null, null]
   });
 
@@ -99,6 +100,32 @@ const Index = () => {
     }
   }
 
+  const setData = (data) => {
+
+    console.log(clearData)
+    console.log(data)
+
+    let newData = Object.assign({}, data);
+
+    console.log(newData)
+
+    setState(newData);
+
+
+
+
+    // setState(Object.create(data));
+
+    // setState(prevState => (
+    //   {...prevState,
+    //     block1: data.block1
+    //   }));
+
+    // let newData = Object.create(data)
+
+    // setState(newData);
+  }
+
   return (
     <>
       <div className = "square-grid">
@@ -111,7 +138,12 @@ const Index = () => {
         <SquareBlock blockid={7} data={state.block7} fn={selectSquare} selectedSquare={state.selectedSquare}/>
         <SquareBlock blockid={8} data={state.block8} fn={selectSquare} selectedSquare={state.selectedSquare}/>
         <SquareBlock blockid={9} data={state.block9} fn={selectSquare} selectedSquare={state.selectedSquare}/>
+        <Button text={"Clear Board"} data={clearData} fn={setData}/>
+        <Button text={"Demo 1"} data={dataSet1} fn={setData}/>
+        <Button text={"Demo 2"} data={dataSet2} fn={setData}/>
       </div>
+
+
 
       <Input insertNumber={insertNumber} />
 

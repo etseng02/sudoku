@@ -26,7 +26,25 @@ const Button = (props) => {
         <h1>{props.text}</h1>
       </div>
     );
+  } else if (props.text.includes("Demo")){
+    return (
+      <div 
+        className ={props.className}
+        onClick={()=>props.fn(props.data)}>
+        <h1>{props.text}</h1>
+      </div>
+    );
+  } else if (props.text.includes("Clear Board")){
+    return (
+      <div 
+        className ={props.className}
+        onClick={()=>props.fn(props.data)}>
+        <h1>{props.text}</h1>
+      </div>
+    );
   }
+
+
 }
 
 export default Button;
