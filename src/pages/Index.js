@@ -23,18 +23,18 @@ const Index = () => {
     selectedSquare: [null, null]
   });
 
+  const numbersList = [1,2,3,4,5,6,7,8,9];
+
   const solveSudoku = (state) => {
 
     setState(prevState => ({...prevState, selectedSquare: [null,null]}));
-  
-    const numbersList = [1,2,3,4,5,6,7,8,9];
-  
-    let dataModel = Object.assign({},state);
 
     let stopFunction = false;
 
+    let newBlockState = JSON.parse(JSON.stringify(state));
+    
     while (stopFunction === false) {
-
+      
       let numbersChanged = false
 
       //Iterate over every block (9 Squares)
@@ -46,36 +46,34 @@ const Index = () => {
           //Each row has 3 numbers, iterate over each number
           for (let number = 0; number <= 2; number++) {
 
-            if (dataModel["block"+ blockNumber][row][number] === null) {
+            if (newBlockState["block"+ blockNumber][row][number] === null) {
               
               let eliminatedNumbers = []
-                .concat(checkRow(row, blockNumber, dataModel))
-                .concat(checkColumn(number, blockNumber, dataModel))
-                .concat(checkWithinBlock(blockNumber, dataModel));
+                .concat(checkRow(row, blockNumber, newBlockState))
+                .concat(checkColumn(number, blockNumber, newBlockState))
+                .concat(checkWithinBlock(blockNumber, newBlockState));
     
               let possibleNumbers = numbersList.filter((staticNumber) => !eliminatedNumbers.includes(staticNumber));
     
               if (possibleNumbers.length === 1) {
 
                 numbersChanged = true;
-
-                let new_block_state = Object.assign({},[dataModel["block"+ blockNumber]]);
-
-                new_block_state[0][row][number] = possibleNumbers[0];
+                
+                newBlockState["block"+blockNumber][row][number] = possibleNumbers[0];
 
                 setState(prevState => ({
-                  ...prevState,
-                  ["block"+ blockNumber]: [...state["block"+blockNumber], new_block_state ]
+                  ...prevState, ["block"+blockNumber]: newBlockState["block"+blockNumber]
                 }));
               }
             }
           }
         }
+
       }// end of block loop
 
       if (numbersChanged === false) {
         stopFunction = true;
-      }
+      } 
 
     }//end of while loop 
   };
@@ -83,10 +81,8 @@ const Index = () => {
   const selectSquare = (blockid, number) => {
     if (blockid === state.selectedSquare[0] && number === state.selectedSquare[1]){
       setState({...state, selectedSquare: [null, null]});
-      console.log("Unselected")
     } else {
       setState({...state, selectedSquare: [blockid, number]});
-      console.log(`BLOCK${blockid}, number was selected ${state.selectedSquare[1]}`);
     }
   }
 
@@ -101,29 +97,8 @@ const Index = () => {
   }
 
   const setData = (data) => {
-
-    console.log(clearData)
-    console.log(data)
-
-    let newData = Object.assign({}, data);
-
-    console.log(newData)
-
+    let newData = JSON.parse(JSON.stringify(data));
     setState(newData);
-
-
-
-
-    // setState(Object.create(data));
-
-    // setState(prevState => (
-    //   {...prevState,
-    //     block1: data.block1
-    //   }));
-
-    // let newData = Object.create(data)
-
-    // setState(newData);
   }
 
   return (
