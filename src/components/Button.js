@@ -31,7 +31,7 @@ const Button = (props) => {
       <div 
         className ={props.className}
         onClick={()=>props.fn(props.data)}>
-        <h1>{props.text}</h1>
+        <h2>{props.text}</h2>
       </div>
     );
   } else if (props.text.includes("Clear Board")){
@@ -39,7 +39,7 @@ const Button = (props) => {
       <div 
         className ={props.className}
         onClick={()=>props.fn(props.data)}>
-        <h1>{props.text}</h1>
+        <h2>{props.text}</h2>
       </div>
     );
   }

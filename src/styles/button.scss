@@ -1,7 +1,7 @@
 .start {
-  width: 10%;
-  padding-left: 2em;
-  padding-right: 2em;
+  // width: 10%;
+  padding-left: 2.5em;
+  padding-right: 2.5em;
   padding-top: 1em;
   padding-bottom: 1em;
   color: white;
@@ -14,4 +14,19 @@
   margin-top: 1em;
   margin-bottom: 1em;
   cursor: pointer;
+}
+
+.demo {
+  height: 50%;
+  width: 65%;
+  align-self: center;
+  color: black;
+  background-color: yellow;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center
+  // line-height:75%;
 }
