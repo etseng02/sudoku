@@ -32,3 +32,24 @@
   background: red;
   cursor: pointer;
 }
+
+@media (max-width: 600px) {
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 36px);
+    grid-template-rows: repeat(3, 36px);
+    grid-gap: 4px;
+  }
+
+  .cell {
+    font-size: 1.5rem;
+    font-weight: normal;
+  }
+
+  .selected-cell {
+    font-size: 1.5rem;
+    font-weight: normal;
+  }
+
+}

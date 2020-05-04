@@ -17,8 +17,6 @@ const checkRow = (rowNumber, blockNumber, dataModel) => {
   })
 
   eliminatedNumbers = eliminatedNumbers.filter(function(val) { return val !== null; })
-
-  // console.log("ELIMINATED ROW NUMBERS " + eliminatedNumbers)
   return eliminatedNumbers
 
 }
@@ -42,7 +40,6 @@ const checkColumn = (columnNumber, blockNumber, dataModel) => {
     })
 
     eliminatedNumbers = eliminatedNumbers.filter(function(val) { return val !== null; });
-    // console.log("ELIMINATED COLUMN NUMBERS " + possibleNumbers)
     return eliminatedNumbers
 }
 
@@ -55,7 +52,6 @@ const checkWithinBlock = (blockNumber, dataModel) => {
   })
 
   eliminatedNumbers = eliminatedNumbers.filter(function(val) { return val !== null; });
-  // console.log("ELINATED BLOCK NUMBERS " + possibleNumbers)
   return eliminatedNumbers
 }
 

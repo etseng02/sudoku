@@ -13,9 +13,9 @@ const Button = (props) => {
   } else if (props.className === "input-button" &&  props.text === " ") {
     return (
       <div 
-        className ={props.className}
+        className = "trash"
         onClick={()=>props.fn(null)}>
-        <h1>{props.text}</h1>
+        <i className = "trash"class="fa fa-trash"></i>
       </div>
     );
   } else if (props.className === "input-button" && props.selectedNumber !== props.text) {

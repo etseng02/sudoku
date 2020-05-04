@@ -4,6 +4,7 @@ import '../styles/index.scss'
 import SquareBlock from '../components/SquareBlock.js'
 import Button from '../components/Button'
 import Input from '../components/Input'
+import Logo from '../components/Logo'
 import {checkRow, checkColumn, checkWithinBlock} from '../helper/helperFunctions'
 import {clearData, dataSet1, dataSet2} from '../helper/dataSets'
 
@@ -104,19 +105,36 @@ const Index = () => {
   return (
     <>
       <div className = "square-grid">
+
+        <div className = "mobile-view">
+          <Logo/>
+        </div>
+
+        <div className = "mobile-view">
+          <Button text={"Demo"} className = {"demo"} data={dataSet1} fn={setData}/>
+        </div>
+
+        <div className = "mobile-view">
+          <Button text={"Clear Board"} className = {"demo"} data={clearData} fn={setData}/>
+        </div>
+
         <SquareBlock blockid={1} data={state.block1} fn={selectSquare} selectedSquare={state.selectedSquare}/>
         <SquareBlock blockid={2} data={state.block2} fn={selectSquare} selectedSquare={state.selectedSquare}/>
         <SquareBlock blockid={3} data={state.block3} fn={selectSquare} selectedSquare={state.selectedSquare}/>
-        <Button text={"Clear Board"} className = {"demo"}data={clearData} fn={setData}/>
+        <div className = "normal-view">
+          <Logo/>
+          <Button text={"Clear Board"} className = {"demo"}data={clearData} fn={setData}/>
+        </div>
         <SquareBlock blockid={4} data={state.block4} fn={selectSquare} selectedSquare={state.selectedSquare}/>
         <SquareBlock blockid={5} data={state.block5} fn={selectSquare} selectedSquare={state.selectedSquare}/>
         <SquareBlock blockid={6} data={state.block6} fn={selectSquare} selectedSquare={state.selectedSquare}/>
-        <Button text={"Demo 1"} className = {"demo"} data={dataSet1} fn={setData}/>
+        <div className = "normal-view">
+          <Button text={"Demo 1"} className = {"demo"} data={dataSet1} fn={setData}/>
+          <Button text={"Demo 2"} className = {"demo"} data={dataSet2} fn={setData}/>
+        </div>
         <SquareBlock blockid={7} data={state.block7} fn={selectSquare} selectedSquare={state.selectedSquare}/>
         <SquareBlock blockid={8} data={state.block8} fn={selectSquare} selectedSquare={state.selectedSquare}/>
         <SquareBlock blockid={9} data={state.block9} fn={selectSquare} selectedSquare={state.selectedSquare}/>
-        <Button text={"Demo 2"} className = {"demo"} data={dataSet2} fn={setData}/>
-
       </div>
 
       <Input insertNumber={insertNumber} />

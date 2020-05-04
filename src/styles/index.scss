@@ -7,4 +7,31 @@
   margin-left: 12.5em;
   margin-bottom: 1em;
 }
+
+.mobile-view {
+  display:none;
+}
+
+@media (max-width: 600px) {
+
+  .square-grid{
+    margin-top: 0em;
+    margin-left: 0em;
+    grid-template-columns: repeat(3, 125px);
+    grid-template-rows: repeat(4, 125px);
+  }
+
+  .normal-view{
+    display: none;
+  }
+
+  .mobile-view {
+    display:flex;
+    justify-content: center;
+    text-align: center;
+    vertical-align: bottom;
+    align-items: flex-end;
+  }
+
+}
   

@@ -26,7 +26,7 @@ const dataSet1 =
   selectedSquare: [null, null]
 };
 
-  const dataSet2 = 
+const dataSet2 = 
 {
   block1: [[null, 9, 1],[null, 2, null],[null, 4, 5]],
   block2: [[3, null, null],[null, null, 8],[null, null, 9]],
@@ -39,8 +39,5 @@ const dataSet1 =
   block9: [[7, null, 4],[null, 1, null],[null, null, 6]],
   selectedSquare: [null, null]
 }
-
-
-
 
 export {clearData, dataSet1, dataSet2};
