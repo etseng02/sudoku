@@ -4,10 +4,10 @@ import '../styles/button.scss'
 
 const Button = (props) => {
 
-  if (props.text === "Start") {
+  if (props.text === "Solve") {
     return (
       <div 
-        className={"start"}
+        className={"solve"}
         onClick={()=> props.fn(props.numbers)}><h1>{props.text}</h1></div>
     );
   } else if (props.className === "input-button" &&  props.text === " ") {

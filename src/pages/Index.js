@@ -139,7 +139,7 @@ const Index = () => {
 
       <Input insertNumber={insertNumber} />
 
-      <Button text={"Start"} fn={solveSudoku} numbers={state}/>
+      <Button text={"Solve"} fn={solveSudoku} numbers={state}/>
 
     </>
   );
